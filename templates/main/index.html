@@ -1,0 +1,431 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<!-- Custom Styles -->
+<style>
+    .navbar-custom {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+        box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        padding: 1rem 0;
+    }
+    
+    .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #ffd700 !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .navbar-nav .nav-link {
+        color: #ffffff !important;
+        font-weight: 500;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        color: #ffd700 !important;
+        transform: translateY(-2px);
+    }
+    
+    .navbar-nav .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 50%;
+        background: #ffd700;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .navbar-nav .nav-link:hover::after {
+        width: 100%;
+    }
+    
+    .hero-section {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="1" fill="%23ffd700" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        background: linear-gradient(45deg, #ffd700, #ffed4e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        color: #e0e0e0;
+        font-weight: 300;
+    }
+    
+    .btn-custom {
+        background: linear-gradient(45deg, #ffd700, #ffed4e);
+        color: #1a1a1a;
+        font-weight: bold;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        text-decoration: none;
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    .btn-custom:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        color: #1a1a1a;
+    }
+    
+    .btn-outline-custom {
+        background: transparent;
+        color: #ffd700;
+        border: 2px solid #ffd700;
+        font-weight: bold;
+        padding: 13px 38px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    .btn-outline-custom:hover {
+        background: #ffd700;
+        color: #1a1a1a;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">� Pizzas Brandini</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                style="border-color: #ffd700;">
+            <span style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 30 30&quot;><path stroke=&quot;%23ffd700&quot; stroke-linecap=&quot;round&quot; stroke-miterlimit=&quot;10&quot; stroke-width=&quot;2&quot; d=&quot;M4 7h22M4 15h22M4 23h22&quot;/></svg>');"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#inicio">🏠 Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#menu">🍕 Menú</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#nosotros">👥 Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#testimonios">⭐ Testimonios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">📞 Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:login' %}">🔐 Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="inicio" class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 mx-auto hero-content">
+                <h1 class="hero-title">Pizzas Brandini</h1>
+                <p class="hero-subtitle">🍕 Las mejores pizzas artesanales de la ciudad ✨</p>
+                <div class="mt-4">
+                    <a href="#menu" class="btn-custom">� Ver Menú</a>
+                    <a href="{% url 'accounts:login' %}" class="btn-outline-custom">🔑 Iniciar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="py-5" style="background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%); color: white;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 style="color: #ffd700; font-weight: bold; margin-bottom: 1.5rem;">
+                        📖 Nuestra Historia
+                    </h2>
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 15px; border-left: 5px solid #ffd700;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem;">
+                            Desde <strong style="color: #ffd700;">1995</strong>, Pizzas Brandini ha sido el lugar favorito de las familias para disfrutar de las mejores pizzas artesanales de la ciudad, preparadas con recetas italianas auténticas.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8;">
+                            Nuestro fundador, <strong style="color: #ffd700;">Giuseppe Brandini</strong>, llegó de Nápoles con el sueño de compartir la verdadera pizza italiana. Hoy mantenemos viva esa tradición con ingredientes importados y masa madre fresca. �
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 style="color: #ffd700; font-weight: bold; margin-bottom: 1.5rem;">
+                        🕐 Horario de Atención
+                    </h2>
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 15px; border-left: 5px solid #ffd700;">
+                        <ul class="list-unstyled" style="font-size: 1.1rem; line-height: 2;">
+                            <li style="margin-bottom: 0.5rem;">
+                                <strong style="color: #ffd700;">📅 Lunes a Jueves:</strong> 11:00 am - 9:00 pm
+                            </li>
+                            <li style="margin-bottom: 0.5rem;">
+                                <strong style="color: #ffd700;">🎉 Viernes y Sábado:</strong> 11:00 am - 10:30 pm
+                            </li>
+                            <li style="margin-bottom: 1rem;">
+                                <strong style="color: #ffd700;">☀️ Domingo:</strong> 12:00 pm - 8:00 pm
+                            </li>
+                        </ul>
+                        <p style="font-size: 1.1rem; color: #ffd700; font-weight: bold;">
+                            📍 Avenida Italia #456, Centro Histórico
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5" style="background: linear-gradient(45deg, #ffd700 0%, #ffed4e 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 style="color: #1a1a1a; font-weight: bold; font-size: 3rem; margin-bottom: 1rem;">
+                        🍽️ Nuestro Menú
+                    </h2>
+                    <p style="color: #2c2c2c; font-size: 1.2rem; margin-bottom: 3rem;">
+                        Descubre los sabores únicos que tenemos preparados para ti ✨
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; background: #1a1a1a;">
+                        <div style="background: linear-gradient(135deg, #2c2c2c, #1a1a1a); padding: 2rem;">
+                            <div style="background: #ffd700; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                <span style="font-size: 1.5rem;">🍕</span>
+                            </div>
+                            <h5 style="color: #ffd700; font-weight: bold; text-align: center; margin-bottom: 1rem;">
+                                Pizza Margherita Clásica
+                            </h5>
+                            <p style="color: #e0e0e0; text-align: center; line-height: 1.6;">
+                                Tomate San Marzano, mozzarella di bufala, albahaca fresca y aceite de oliva extra virgen.
+                            </p>
+                            <p style="color: #ffd700; font-weight: bold; font-size: 1.5rem; text-align: center; margin: 0;">
+                                $15.00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; background: #1a1a1a;">
+                        <div style="background: linear-gradient(135deg, #2c2c2c, #1a1a1a); padding: 2rem;">
+                            <div style="background: #ffd700; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                <span style="font-size: 1.5rem;">🍖</span>
+                            </div>
+                            <h5 style="color: #ffd700; font-weight: bold; text-align: center; margin-bottom: 1rem;">
+                                Pizza Quattro Carni
+                            </h5>
+                            <p style="color: #e0e0e0; text-align: center; line-height: 1.6;">
+                                Salami, pepperoni, jamón serrano y chorizo italiano sobre nuestra salsa especial.
+                            </p>
+                            <p style="color: #ffd700; font-weight: bold; font-size: 1.5rem; text-align: center; margin: 0;">
+                                $22.00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; background: #1a1a1a;">
+                        <div style="background: linear-gradient(135deg, #2c2c2c, #1a1a1a); padding: 2rem;">
+                            <div style="background: #ffd700; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                <span style="font-size: 1.5rem;">🧄</span>
+                            </div>
+                            <h5 style="color: #ffd700; font-weight: bold; text-align: center; margin-bottom: 1rem;">
+                                Pizza Bianca al Aglio
+                            </h5>
+                            <p style="color: #e0e0e0; text-align: center; line-height: 1.6;">
+                                Base blanca con ajo confitado, romero fresco, aceite de trufa y parmesano.
+                            </p>
+                            <p style="color: #ffd700; font-weight: bold; font-size: 1.5rem; text-align: center; margin: 0;">
+                                $18.00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="py-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); color: white;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 style="color: #ffd700; font-weight: bold; font-size: 3rem; margin-bottom: 1rem;">
+                        💬 Lo que dicen nuestros clientes
+                    </h2>
+                    <p style="color: #e0e0e0; font-size: 1.2rem; margin-bottom: 3rem;">
+                        ⭐ Reseñas auténticas de familias satisfechas ⭐
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 20px; border: 2px solid rgba(255, 215, 0, 0.3); height: 100%; text-align: center; transition: all 0.3s ease;">
+                        <div style="color: #ffd700; font-size: 2rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
+                        <p style="font-style: italic; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; color: #e0e0e0;">
+                            "Las mejores pizzas de la ciudad! La masa es perfecta y los ingredientes de primera calidad. �"
+                        </p>
+                        <strong style="color: #ffd700; font-size: 1.1rem;">- María González</strong>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 20px; border: 2px solid rgba(255, 215, 0, 0.3); height: 100%; text-align: center; transition: all 0.3s ease;">
+                        <div style="color: #ffd700; font-size: 2rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
+                        <p style="font-style: italic; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; color: #e0e0e0;">
+                            "Auténtico sabor italiano en cada bocado. Giuseppe realmente sabe hacer pizza como en Nápoles. 🇮🇹"
+                        </p>
+                        <strong style="color: #ffd700; font-size: 1.1rem;">- Carlos Rodríguez</strong>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 20px; border: 2px solid rgba(255, 215, 0, 0.3); height: 100%; text-align: center; transition: all 0.3s ease;">
+                        <div style="color: #ffd700; font-size: 2rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
+                        <p style="font-style: italic; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; color: #e0e0e0;">
+                            "Tres generaciones de mi familia han disfrutado de las increíbles pizzas de Pizzas Brandini. 👵👩👧"
+                        </p>
+                        <strong style="color: #ffd700; font-size: 1.1rem;">- Ana Martínez</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-5" style="background: linear-gradient(45deg, #ffd700 0%, #ffed4e 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h3 style="color: #1a1a1a; font-weight: bold; margin-bottom: 2rem; font-size: 2.5rem;">
+                        📞 Contáctanos
+                    </h3>
+                    <div style="background: rgba(26, 26, 26, 0.1); padding: 2rem; border-radius: 15px;">
+                        <p style="color: #2c2c2c; font-size: 1.2rem; margin-bottom: 1rem;">
+                            <strong style="color: #1a1a1a;">📍 Dirección:</strong> Avenida Italia #456, Centro Histórico
+                        </p>
+                        <p style="color: #2c2c2c; font-size: 1.2rem; margin-bottom: 1rem;">
+                            <strong style="color: #1a1a1a;">📱 Teléfono:</strong> (555) 987-6543
+                        </p>
+                        <p style="color: #2c2c2c; font-size: 1.2rem; margin-bottom: 0;">
+                            <strong style="color: #1a1a1a;">📧 Email:</strong> info@pizzasbrandini.com
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h3 style="color: #1a1a1a; font-weight: bold; margin-bottom: 2rem; font-size: 2.5rem;">
+                        🌟 Síguenos
+                    </h3>
+                    <div style="background: rgba(26, 26, 26, 0.1); padding: 2rem; border-radius: 15px;">
+                        <p style="color: #2c2c2c; font-size: 1.2rem; margin-bottom: 2rem;">
+                            Mantente al día con nuestras ofertas especiales y eventos 🎉
+                        </p>
+                        <div class="social-links">
+                            <a href="#" style="background: #1a1a1a; color: #ffd700; border: 2px solid #1a1a1a; padding: 12px 25px; border-radius: 50px; text-decoration: none; margin: 5px; display: inline-block; font-weight: bold; transition: all 0.3s ease;">
+                                📘 Facebook
+                            </a>
+                            <a href="#" style="background: #1a1a1a; color: #ffd700; border: 2px solid #1a1a1a; padding: 12px 25px; border-radius: 50px; text-decoration: none; margin: 5px; display: inline-block; font-weight: bold; transition: all 0.3s ease;">
+                                🐦 Twitter
+                            </a>
+                            <a href="#" style="background: #1a1a1a; color: #ffd700; border: 2px solid #1a1a1a; padding: 12px 25px; border-radius: 50px; text-decoration: none; margin: 5px; display: inline-block; font-weight: bold; transition: all 0.3s ease;">
+                                📸 Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); color: #ffd700; padding: 3rem 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-weight: bold; margin-bottom: 1rem;">� Pizzas Brandini</h4>
+                        <p style="color: #e0e0e0; font-size: 1.1rem;">
+                            Auténtica tradición italiana desde 1995 ✨
+                        </p>
+                    </div>
+                    <div style="border-top: 2px solid #ffd700; padding-top: 2rem;">
+                        <p style="margin: 0; font-size: 1rem; color: #e0e0e0;">
+                            &copy; 2025 Pizzas Brandini. Todos los derechos reservados. 
+                            <span style="color: #ffd700;">🇮🇹</span> Hecho con amor y tradición italiana.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- Additional CSS for hover effects -->
+<style>
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3) !important;
+    }
+    
+    .social-links a:hover {
+        background: #ffd700 !important;
+        color: #1a1a1a !important;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+    }
+    
+    section[id="testimonios"] > div > div > div:hover {
+        transform: translateY(-5px);
+        border-color: #ffd700 !important;
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+    }
+</style>
+{% endblock %}
