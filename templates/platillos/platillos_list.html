@@ -19,8 +19,8 @@
         {% for platillo in platillos %}
         <tr>
             <td>
-                <a class="btn btn-primary" href="">Editar</a>
-                <a class="btn btn-danger" href="">Eliminar</a>
+                <a class="btn btn-primary" href="{% url 'platillos:platillos_edit' platillo.pk %}">Editar</a>
+                <a class="btn btn-danger" href="{% url 'platillos:platillos_delete' platillo.pk %}">Eliminar</a>
             </td>
             <td>{{platillo.nombre}}</td>
             <td>{{platillo.descripcion}}</td>

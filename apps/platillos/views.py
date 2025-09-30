@@ -38,3 +38,14 @@ class PlatilloCreateView(LoginRequiredMixin, CreateView):
     form_class = PlatilloForm
     template_name = 'platillos/platillos_form.html'
     success_url = '/platillos/platillos/'
+
+class PlatilloUpdateView(LoginRequiredMixin, UpdateView):
+    model = Platillo
+    form_class = PlatilloForm
+    template_name = 'platillos/platillos_edit_form.html'
+    success_url = '/platillos/platillos/'
+
+class PlatilloDeleteView(LoginRequiredMixin, DeleteView):
+    model = Platillo
+    template_name = 'platillos/platillos_confirm_delete.html'
+    success_url = '/platillos/platillos/'

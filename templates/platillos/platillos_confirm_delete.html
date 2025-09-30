@@ -1,0 +1,17 @@
+{% extends 'main/base_user.html' %}
+
+{% block content %}
+<h1>Eliminar platillo</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="alert alert-warning">
+        <p>¿Estás seguro de que deseas eliminar el platillo "<strong>{{ object.nombre }}</strong>"?</p>
+        <p><strong>Descripción:</strong> {{ object.descripcion }}</p>
+        <p><strong>Precio:</strong> ${{ object.precio }}</p>
+        <p><strong>Categoría:</strong> {{ object.categoria.nombre }}</p>
+    </div>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-secondary" href="{% url 'platillos:platillos_list' %}">Cancelar</a>
+</form>
+{% endblock %}

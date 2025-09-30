@@ -10,4 +10,6 @@ urlpatterns = [
     path('categorias/<int:pk>/delete/', views.CategoriaDeleteView.as_view(), name='categoria_delete'),
     path('platillos/', views.PlatilloListView.as_view(), name='platillos_list'),
     path('platillos/add/', views.PlatilloCreateView.as_view(), name='platillos_create'),
+    path('platillos/<int:pk>/edit/', views.PlatilloUpdateView.as_view(), name='platillos_edit'),
+    path('platillos/<int:pk>/delete/', views.PlatilloDeleteView.as_view(), name='platillos_delete'),
 ]
