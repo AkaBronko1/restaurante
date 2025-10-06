@@ -1,0 +1,12 @@
+{% extends 'main/base_user.html' %}
+
+{% block content %}
+<h1>Editar Mesa</h1>
+
+<form action="{% url 'mesas:mesas_edit' form.instance.pk %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" href="{% url 'mesas:mesas_list' %}">Cancelar</a>
+</form>
+{% endblock %}

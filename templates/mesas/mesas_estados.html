@@ -1,0 +1,73 @@
+{% extends 'main/base_user.html' %}
+
+{% block content %}
+<h1>Estado de las Mesas</h1>
+
+<div class="mb-3">
+    <a class="btn btn-secondary" href="{% url 'mesas:mesas_list' %}">← Volver a Lista de Mesas</a>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5>Disponibles ({{ mesas_disponibles.count }})</h5>
+            </div>
+            <div class="card-body">
+                {% for mesa in mesas_disponibles %}
+                    <span class="badge bg-success me-1 mb-1">Mesa {{ mesa.numero }} ({{ mesa.capacidad }}p)</span>
+                {% empty %}
+                    <p class="text-muted">No hay mesas disponibles</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h5>Ocupadas ({{ mesas_ocupadas.count }})</h5>
+            </div>
+            <div class="card-body">
+                {% for mesa in mesas_ocupadas %}
+                    <span class="badge bg-danger me-1 mb-1">Mesa {{ mesa.numero }} ({{ mesa.capacidad }}p)</span>
+                {% empty %}
+                    <p class="text-muted">No hay mesas ocupadas</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5>Reservadas ({{ mesas_reservadas.count }})</h5>
+            </div>
+            <div class="card-body">
+                {% for mesa in mesas_reservadas %}
+                    <span class="badge bg-warning text-dark me-1 mb-1">Mesa {{ mesa.numero }} ({{ mesa.capacidad }}p)</span>
+                {% empty %}
+                    <p class="text-muted">No hay mesas reservadas</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h5>Mantenimiento ({{ mesas_mantenimiento.count }})</h5>
+            </div>
+            <div class="card-body">
+                {% for mesa in mesas_mantenimiento %}
+                    <span class="badge bg-secondary me-1 mb-1">Mesa {{ mesa.numero }} ({{ mesa.capacidad }}p)</span>
+                {% empty %}
+                    <p class="text-muted">No hay mesas en mantenimiento</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

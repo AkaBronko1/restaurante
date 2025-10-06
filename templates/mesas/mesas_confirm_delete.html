@@ -1,0 +1,16 @@
+{% extends 'main/base_user.html' %}
+
+{% block content %}
+<h1>Eliminar Mesa</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="alert alert-warning">
+        <p>¿Estás seguro de que deseas eliminar la "<strong>{{ object }}</strong>"?</p>
+        <p><strong>Capacidad:</strong> {{ object.capacidad }} personas</p>
+        <p><strong>Estado:</strong> {{ object.get_estado_display }}</p>
+    </div>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-secondary" href="{% url 'mesas:mesas_list' %}">Cancelar</a>
+</form>
+{% endblock %}
