@@ -23,6 +23,6 @@ urlpatterns = [
     path('', views.main_index, name='main_index'),
     path('accounts/', include('apps.accounts.urls')),
     path('platillos/', include('apps.platillos.urls')),
-    path('mesas/', include('apps.mesas.urls')),
+    path('ordenes/', include('apps.ordenes.urls')),
     path('dashboard/', views.index_user, name='index_user'),
 ]

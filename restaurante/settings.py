@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # Local apps
     'apps.accounts',
     'apps.platillos',
-    'apps.mesas.apps.MesasConfig',
+    'apps.ordenes',
 ]
 
 MIDDLEWARE = [

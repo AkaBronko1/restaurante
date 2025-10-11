@@ -1,9 +1,9 @@
 {% extends 'main/base_user.html' %}
 
 {% block content %}
-<h1>Editar mesa</h1>
+<h1>Agregar Orden</h1>
 
-<form action="{% url 'ordenes:mesas_update' form.instance.pk %}" method="post">
+<form action="{% url 'ordenes:ordenes_create' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Guardar</button>
