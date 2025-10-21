@@ -1,0 +1,33 @@
+{% extends 'main/base_user.html' %}
+
+{% block content %}
+<h1>Pagar Orden No. {{ orden.id }} - {{ orden.fecha_hora }}</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Platillo</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detalle in detalles %}
+        <tr>            
+            <td>{{detalle.platillo.nombre}}</td>
+            <td>{{detalle.cantidad}}</td> 
+            <td>${{detalle.subtotal}}</td>           
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Total: ${{total}}</h2>
+
+<form action="{% url 'ordenes:ordenes_pagar' orden.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Pagar</button>
+    <a href="{% url 'ordenes:ordenes_list' %}" class="btn btn-secondary">Regresar</a>
+</form>
+{% endblock %}

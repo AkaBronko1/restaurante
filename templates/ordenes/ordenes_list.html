@@ -19,7 +19,7 @@
         <tr>
             <td>
                 <a class="btn btn-primary" href="{% url 'ordenes:ordenes_detalle_list' orden.pk %}">Editar</a>
-                <a class="btn btn-danger" href="">Eliminar</a>
+                <a class="btn btn-success" href="{% url 'ordenes:ordenes_pagar' orden.pk %}">Pagar</a>
             </td>
             <td>{{orden.fecha_hora}}</td>
             <td>{{orden.mesa.nombre}}</td>

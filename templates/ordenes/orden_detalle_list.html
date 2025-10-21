@@ -22,8 +22,8 @@
         {% for detalle in orden_detalles %}
         <tr>
             <td>
-                <a class="btn btn-primary" href="">Editar</a>
-                <a class="btn btn-danger" href="">Eliminar</a>
+                <a class="btn btn-primary" href="{% url 'ordenes:ordenes_detalle_update' detalle.id %}">Editar</a>
+                <a class="btn btn-danger" href="{% url 'ordenes:ordenes_detalle_delete' detalle.id %}">Eliminar</a>
             </td>
             <td>{{detalle.platillo.nombre}}</td>
             <td>{{detalle.cantidad}}</td>

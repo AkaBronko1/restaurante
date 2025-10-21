@@ -1,0 +1,14 @@
+{% extends 'main/base_user.html' %}
+
+{% block content %}
+<h1>Eliminar Detalle de Orden</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <p>¿Estás seguro de que deseas eliminar este detalle?</p>
+    <p><strong>Platillo:</strong> {{ object.platillo.nombre }}</p>
+    <p><strong>Cantidad:</strong> {{ object.cantidad }}</p>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-primary" href="{% url 'ordenes:ordenes_detalle_list' object.orden.id %}">Regresar</a>
+</form>
+{% endblock %}
