@@ -1,53 +1,222 @@
 {% extends 'main/base_user.html' %}
 {% load static %}
 
-{% block title %}Inicio - Restaurante{% endblock %}
-{% block page_title %}🏠 Inicio{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="mb-4">Dashboard</h2>
+        
+        <!-- Stats Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="stat-card card bg-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-1 text-muted">Ventas Hoy</h6>
+                                <h3 class="card-title">${{ventas_totales|floatformat:2}}</h3>
+                                <p class="card-text small text-success">
+                                    <!-- <i class="bi bi-arrow-up"></i> 12% desde ayer -->
+                                </p>
+                            </div>
+                            <div class="card-icon text-primary">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="stat-card card bg-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-1 text-muted">Órdenes Hoy</h6>
+                                <h3 class="card-title">{{cantidad_ordenes}}</h3>
+                                <p class="card-text small text-success"><i class="bi bi-arrow-up"></i> 5% desde ayer</p>
+                            </div>
+                            <div class="card-icon text-success">
+                                <i class="bi bi-cart-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="stat-card card bg-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-1 text-muted">Mesas Activas</h6>
+                                <h3 class="card-title">-</h3>
+                                <p class="card-text small text-muted">En tiempo real</p>
+                            </div>
+                            <div class="card-icon text-warning">
+                                <i class="bi bi-table"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="stat-card card bg-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-1 text-muted">Platillos del Día</h6>
+                                <h3 class="card-title">-</h3>
+                                <p class="card-text small text-muted">Disponibles</p>
+                            </div>
+                            <div class="card-icon text-danger">
+                                <i class="bi bi-egg-fried"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts and Recent Orders -->
+        <div class="row g-4">
+            <div class="col-md-8">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Ventas de la Semana</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-center" style="height: 300px;">                            
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Órdenes Recientes</h5>
+                    </div>
+                    <div class="card-body recent-orders">
+                        {% for orden in ultimas_ordenes %}
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light rounded p-2 me-2">
+                                        <i class="bi bi-person text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">{{orden.mesa.nombre}}</h6>
+                                        <small class="text-muted">#ORD-{{ orden.id }}</small>
+                                    </div>
+                                </div>
+                                <span class="order-status-badge {% if orden.estatus == 'pagada' %}bg-success text-white{% elif orden.estatus == 'pendiente' %}bg-warning text-dark{% else %}bg-danger text-white{% endif %}">{{ orden.estatus }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popular Items -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Platos Más Populares</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Platillo</th>
+                                        <th>Ventas</th>
+                                        <th>Tendencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for platillo in platillos_mas_vendidos %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-egg-fried text-warning me-2"></i>
+                                                {{ platillo.detalles__platillo__nombre }}
+                                            </div>
+                                        </td>
+                                        <td>{{ platillo.total_vendido }} unidades</td>
+                                        <td><span class="text-success"><i class="bi bi-arrow-up"></i> Trending</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-{% block extra_css %}
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        {% for venta in ventas_por_dia %}
+            '{{venta.dia}}'{% if not forloop.last %},{% endif %}
+        {% endfor %}
+        ],
+      datasets: [{
+        label: 'Ventas',
+        data: [
+          {% for venta in ventas_por_dia %}
+              {{venta.total|safe}}{% if not forloop.last %},{% endif %}
+          {% endfor %}
+            ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
 <style>
-    .welcome-hero {
-        background: linear-gradient(135deg, #212529 0%, #495057 100%);
-        border-radius: 15px;
-        color: white;
-        padding: 3rem 2rem;
-    }
-    
-    .feature-card {
-        transition: transform 0.2s ease-in-out;
-        border: 1px solid rgba(255, 193, 7, 0.2);
-        height: 100%;
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(255, 193, 7, 0.1);
-        border-color: #ffc107;
-    }
-    
-    .quick-stats {
-        background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
-        color: white;
-        border-radius: 10px;
-    }
+.stat-card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.card-icon {
+    font-size: 2rem;
+    opacity: 0.3;
+}
+
+.order-status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.recent-orders {
+    max-height: 300px;
+    overflow-y: auto;
+}
 </style>
 {% endblock %}
-
-{% block content %}
-<!-- Hero Welcome Section -->
-<div class="welcome-hero text-center mb-5">
-    <div class="row align-items-center">
-        <div class="col-md-8 mx-auto">
-            <h1 class="display-4 fw-bold mb-3">
-                ¡Hola, {{ user.first_name|default:user.username }}! 👋
-            </h1>
-            <p class="lead mb-4">
-                Bienvenido a tu panel de gestión del restaurante. Desde aquí puedes administrar 
-                tu menú, categorías y ver el rendimiento de tu negocio.
-            </p>
-            <div class="d-flex justify-content-center gap-3">
-                <a href="{% url 'index_user' %}" class="btn btn-warning btn-lg">
-                    <i class="bi bi-speedometer2 me-2"></i>Ver Dashboard
                 </a>
                 <a href="{% url 'platillos:platillos_create' %}" class="btn btn-outline-light btn-lg">
                     <i class="bi bi-plus-circle me-2"></i>Nuevo Platillo

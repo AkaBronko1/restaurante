@@ -23,6 +23,11 @@ class Orden(models.Model):
     fecha_hora = models.DateTimeField(auto_now_add=True)
     estatus = models.CharField(max_length=50, default='pendiente')
 
+    @property
+    def total(self):
+        detalles = self.detalles.all()
+        return sum(detalle.subtotal for detalle in detalles)
+
 class OrdenDetalle(models.Model):
     orden = models.ForeignKey(Orden, on_delete=models.CASCADE, related_name='detalles')
     platillo = models.ForeignKey(Platillo, on_delete=models.CASCADE, related_name='detalles')

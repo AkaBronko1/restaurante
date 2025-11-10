@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.platillos',
     'apps.ordenes',
+    # Third party apps
+    'rest_framework',
+    'apps.api',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +133,11 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.AppUser'
+
+# Django REST Framework Configuration
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
