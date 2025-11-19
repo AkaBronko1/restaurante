@@ -28,3 +28,15 @@ ENV/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Tutoriales y documentación (no funcionales)
+TUTORIAL_*.md
+tutorial_*.md
+API_TESTING_GUIDE.md
+DOCUMENTACION_API_REST.md
+GUIA_CREAR_PDF.md
+
+# Scripts de transformación
+transform_*.ps1
+transform_*.py
+check_*.py
